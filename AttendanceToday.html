@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance Plus</title>
+
+  <p style="text-align:right;">Ms. Kerr</p>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #csvFile {
+      display: none;
+    }
+
+    .button {
+      background-color: #5d178c;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    #csvTable {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #csvTable th, #csvTable td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #csvTable th {
+      background-color: #5d178c;
+      color: white;
+    }
+  </style>
+  <script>
+    function handleFileSelect(event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var contents = e.target.result;
+        var lines = contents.split("\n");
+        var table = document.getElementById("csvTable");
+
+        for (var i = 0; i < lines.length; i++) {
+          var row = document.createElement("tr");
+          var cells = lines[i].split(",");
+
+          for (var j = 0; j < cells.length; j++) {
+            var cell = document.createElement(i === 0 ? "th" : "td");
+            cell.textContent = cells[j];
+            row.appendChild(cell);
+          }
+
+          table.appendChild(row);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  </script>
+</head>
+<body>
+  <h1>Attendance Plus</h1>
+  <form action="/action_page.php">
+  <label for="sort">Select:</label>
+  <select name="Select" id="Options">
+    <option value="Student">Student</option>
+    <option value="Date">Date</option>
+    <option value="Block">Block</option>
+    <option value="RTI">RTI</option>
+  </select>
+  <br><br>
+
+</form>
+  <label for="csvFile" class="button">Open</label>
+  <input type="file" id="csvFile" accept=".csv" onchange="handleFileSelect(event)">
+  <table id="csvTable"></table>
+</body>
+</html>
