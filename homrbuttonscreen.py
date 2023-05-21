@@ -4,7 +4,7 @@ Created on Fri May 19 16:57:18 2023
 
 @author: vidhu
 """
-filename = "C:/Users/vidhu/onedrive/desktop/testqr5.py"
+filename = "testqr5.py"
 import kivy
 from kivy.app import App
 from kivy.uix.button import Button
@@ -14,7 +14,7 @@ import time
 
 class MyApp(App):
     def build(self):
-        button = Button(text='Mark Your Atenndance', on_press=self.on_button_press)       
+        button = Button(text='Mark Your Attendance', on_press=self.on_button_press)       
         #button = Button(text='Cry abt life', on_press=self.on_button_press)
         return button
 
